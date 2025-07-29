@@ -246,6 +246,21 @@ nnoremap <leader>l :BLines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>d :lua require('lint').try_lint()<CR>
 
+" === Prettier Format on Save ===
+function! PrettierFormat()
+  if executable('prettier')
+    let l:current_pos = getpos('.')
+    silent! execute '%!prettier --stdin-filepath ' . shellescape(expand('%'))
+    if v:shell_error
+      undo
+      echo "Prettier formatting failed"
+    endif
+    call setpos('.', l:current_pos)
+  endif
+endfunction
+
+autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx,*.vue,*.css,*.scss,*.html,*.json,*.md call PrettierFormat()
+
 " Optional: Transparent background
 " hi Normal guibg=NONE ctermbg=NONE
 
