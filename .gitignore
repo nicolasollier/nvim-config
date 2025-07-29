@@ -1,0 +1,17 @@
+# Neovim temporary files
+*.swp
+*.swo
+*~
+
+# Plugin directories (si vous utilisez un plugin manager)
+pack/
+plugged/
+lazy-lock.json
+
+# Log files
+*.log
+
+# Neovim data directory contents
+undodir/
+session/
+shada/
