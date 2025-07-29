@@ -48,6 +48,7 @@ set number relativenumber
 set expandtab shiftwidth=2 tabstop=2 smartindent
 set wrap
 set ignorecase smartcase incsearch hlsearch
+set clipboard=unnamedplus
 set termguicolors
 syntax on
 
@@ -62,6 +63,7 @@ endtry
 
 " === Lua Config ===
 lua << EOF
+require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/lua/snippets/" })
 -- === Tree-sitter ===
 require("nvim-treesitter.configs").setup {
   ensure_installed = { "go", "lua", "python", "javascript", "typescript", "html", "css", "json", "vue", "rust" },
@@ -138,18 +140,48 @@ lint.linters_by_ft = {
   python = { "flake8" },
   javascript = { "eslint" },
   typescript = { "eslint" },
+  vue = { "eslint" },
   lua = { "luacheck" },
   sh = { "shellcheck" },
 }
 
+lint.linters.eslint.args = {
+  "--format", "json",
+  "--stdin",
+  "--stdin-filename", function() return vim.fn.expand("%:p") end,
+}
+
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "TextChanged" }, {
-  callback = function() lint.try_lint() end,
+  callback = function() 
+    lint.try_lint()
+  end,
 })
 
 vim.diagnostic.config({
-  virtual_text = true,
-  signs = true,
+  virtual_text = {
+    enabled = true,
+    source = "if_many",
+    prefix = "●",
+  },
+  signs = {
+    active = {
+      { name = "DiagnosticSignError", text = "✘" },
+      { name = "DiagnosticSignWarn", text = "▲" },
+      { name = "DiagnosticSignHint", text = "⚑" },
+      { name = "DiagnosticSignInfo", text = "❯" },
+    },
+  },
   update_in_insert = false,
+  underline = true,
+  severity_sort = true,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
 })
 
 -- === Dashboard Setup ===
