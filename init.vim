@@ -235,13 +235,13 @@ let mapleader = " "
 
 " === FZF Configuration ===
 set rtp+=/opt/homebrew/opt/fzf
-let $FZF_DEFAULT_OPTS = '--height 40% --layout=reverse --border --bind=ctrl-j:down,ctrl-k:up,ctrl-d:page-down,ctrl-u:page-up,ctrl-a:select-all,ctrl-t:toggle'
+let $FZF_DEFAULT_OPTS = '--height 40% --layout=default --border --bind=ctrl-j:down,ctrl-k:up,ctrl-d:page-down,ctrl-u:page-up,ctrl-a:select-all,ctrl-t:toggle'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let g:fzf_buffers_jump = 1
 
 nnoremap <C-p> :Files<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>f :Rg<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-f> :Rg<CR>
 nnoremap <leader>l :BLines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>d :lua require('lint').try_lint()<CR>
