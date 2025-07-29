@@ -232,6 +232,15 @@ require('dashboard').setup {
 EOF
 
 let mapleader = " "
+
+" === FZF Configuration ===
+let $FZF_DEFAULT_OPTS = '--bind=ctrl-j:down,ctrl-k:up,ctrl-d:page-down,ctrl-u:page-up'
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+" Add FZF binary to PATH
+let $PATH = $PATH . ':' . expand('~/.local/share/nvim/plugged/fzf/bin')
+
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Rg<CR>
