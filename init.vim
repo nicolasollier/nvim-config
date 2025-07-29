@@ -38,6 +38,9 @@ Plug 'windwp/nvim-autopairs'
 " Linting
 Plug 'mfussenegger/nvim-lint'
 
+" Dashboard
+Plug 'nvimdev/dashboard-nvim'
+
 call plug#end()
 
 " === General Settings ===
@@ -148,6 +151,52 @@ vim.diagnostic.config({
   signs = true,
   update_in_insert = false,
 })
+
+-- === Dashboard Setup ===
+require('dashboard').setup {
+  theme = 'hyper',
+  config = {
+    header = {
+      '',
+      '███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗',
+      '████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║',
+      '██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║',
+      '██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+      '██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║',
+      '╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝',
+      '',
+      '    🚀 Welcome to your personalized development environment!',
+      '',
+    },
+    shortcut = {
+      { desc = '󰊳 Update Plugins', group = '@property', action = 'PlugUpdate', key = 'u' },
+      { desc = ' Find File', group = 'Label', action = 'Files', key = 'f' },
+      { desc = ' Recent Files', group = 'Label', action = 'History', key = 'r' },
+      { desc = ' Find Text', group = 'Number', action = 'Rg', key = 't' },
+      { desc = ' New File', group = 'Action', action = 'enew', key = 'n' },
+      { desc = ' Config', group = 'Action', action = 'edit ~/.config/nvim/init.vim', key = 'c' },
+      { desc = '󰗼 Quit', group = 'Action', action = 'quit', key = 'q' },
+    },
+    footer = {
+      '',
+      '📚 Main Keybindings:',
+      '',
+      '  <Space>     Leader key',
+      '  <C-p>       Find files (FZF)',
+      '  <Leader>b   Switch buffers',
+      '  <Leader>f   Find text in files (Ripgrep)',
+      '  <Leader>l   Search lines in current buffer',
+      '  <Leader>h   File history',
+      '  <Leader>d   Run diagnostics/lint',
+      '',
+      '💡 Tips:',
+      '  - Use Tab/S-Tab for completion navigation',
+      '  - Ctrl+Space to trigger completion',
+      '  - :PlugInstall to install new plugins',
+      '',
+    }
+  }
+}
 EOF
 
 let mapleader = " "
