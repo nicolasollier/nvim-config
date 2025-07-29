@@ -234,12 +234,10 @@ EOF
 let mapleader = " "
 
 " === FZF Configuration ===
-let $FZF_DEFAULT_OPTS = '--bind=ctrl-j:down,ctrl-k:up,ctrl-d:page-down,ctrl-u:page-up'
-let g:fzf_layout = { 'down': '40%' }
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-
-" Add FZF binary to PATH
-let $PATH = $PATH . ':' . expand('~/.local/share/nvim/plugged/fzf/bin')
+set rtp+=/opt/homebrew/opt/fzf
+let $FZF_DEFAULT_OPTS = '--height 40% --layout=reverse --border --bind=ctrl-j:down,ctrl-k:up,ctrl-d:page-down,ctrl-u:page-up,ctrl-a:select-all,ctrl-t:toggle'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let g:fzf_buffers_jump = 1
 
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
