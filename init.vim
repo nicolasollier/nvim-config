@@ -246,6 +246,19 @@ nnoremap <leader>l :BLines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>d :lua require('lint').try_lint()<CR>
 
+" === Create New File Function ===
+function! CreateNewFile()
+  call inputsave()
+  let name = input('New file: ')
+  call inputrestore()
+  redraw
+  if name != ''
+    execute 'edit ' . name
+  endif
+endfunction
+
+nnoremap <C-n> :call CreateNewFile()<CR>
+
 " === Prettier Format on Save ===
 function! PrettierFormat()
   if executable('prettier')
